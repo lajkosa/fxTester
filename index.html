@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>FOREX - tester</title>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" integrity="sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/fontawesome.css" integrity="sha384-Lyz+8VfV0lv38W729WFAmn77iH5OSroyONnUva4+gYaQTic3iI2fnUKtDSpbVf0J" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+<body>
+<div class="page-wrapper">
+	<h1>FOREX - tester</h1>
+	<div class="form">
+		<div class="form__item">
+			<label for="account_size">Account size</label>
+			<input type="text" id="account_size" class="form__input">
+		</div>
+		<div class="form__item">
+			<label for="probability">Probability</label>
+			<input type="text" id="probability" class="form__input">
+		</div>
+		<div class="form__item">
+			<label for="risk">Risk</label>
+			<input type="text" id="risk" class="form__input">
+		</div>
+		<div class="form__item">
+			<label for="sl">Risk Reward ratio</label>
+			<input type="text" id="sl" class="no-margin form__input--narrow form__input"> / <input type="text" id="tp" class="form__input form__input--narrow">
+		</div>
+		<div class="form__item">
+			<label for="trades_week">Number of trades in a week</label>
+			<input type="text" id="trades_week" class="form__input">
+		</div>
+		<div class="form__item">
+			<label for="trades_month">Interval in months</label>
+			<input type="text" id="trades_month" class="form__input">
+		</div>
+		<div class="form__item">
+			<button id="do_trade">Simulate</button>
+		</div>
+	</div>
+	<div id="result">
+
+	</div>
+	<div id="summary_box"></div>
+	<div class="navigator">
+		<a href="#" id="stb" class="navigator__bottom"><i class="fas fa-caret-square-down"></i></a> |
+		<a href="#" id="stt" class="navigator__top"><i class="fas fa-caret-square-up"></i></a>
+	</div>
+</div>
+
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/Order.js"></script>
+<script src="js/Table.js"></script>
+<script src="js/controller.js"></script>
+</body>
+</html>
