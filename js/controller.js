@@ -15,7 +15,8 @@ jQuery(function() {
 		win: 0,
 		lose: 0,
 		profit: 0,
-		trades: 0
+		trades: 0,
+		monthly_costs: 0
 	};
 
 	var _account_size = 2000;
@@ -70,6 +71,15 @@ jQuery(function() {
 			var new_order = new Order();
 			var properties = {};
 
+			// end of the month, decrease equity with the monthly cost
+			if ( i !== 0 && i % a_month === 0 ) {
+
+				var monthly_cost = parseInt( $( '#monthly_cost' ).val() );
+
+				equity -= monthly_cost;
+				_total.monthly_costs += monthly_cost;
+			}
+
 			new_order.trade( equity, options );
 
 			if ( i !== 0 && i % ( a_month * 12 ) === 0 ) {
@@ -80,6 +90,9 @@ jQuery(function() {
 
 				row.th( 'year', { colspan: 5 });
 				row.th( ( i / ( a_month * 12 ) ) + '.' );
+
+				_setMonthlyCostRow( table );
+
 			} else if ( i !== 0 && i % a_month === 0 ) {
 				// check month
 
@@ -89,6 +102,8 @@ jQuery(function() {
 
 				row.th( 'month', { colspan: 5 });
 				row.th( ( i / a_month ) + '.');
+
+				_setMonthlyCostRow( table );
 			}
 
 			row = table.tr({
@@ -112,7 +127,6 @@ jQuery(function() {
 			} else {
 				++_total.lose;
 			}
-
 			++_total.trades;
 
 			_total.profit += new_order.getProfit();
@@ -122,13 +136,29 @@ jQuery(function() {
 		$( '#result' ).html( table.toString() );
 	};
 
+	var _setMonthlyCostRow = function( table ) {
+
+		var monthly_cost = Math.abs( $( '#monthly_cost' ).val() );
+
+		if ( monthly_cost > 0 ) {
+
+			var row = table.tr({
+				class: 'separator separator--summary'
+			});
+
+			row.td('monthly cost', { colspan: 5 });
+			row.td( '-' + monthly_cost );
+		}
+	};
+
 	var _hideSummaryBox = function() {
 
 		_total = {
 			win: 0,
 			lose: 0,
 			profit: 0,
-			trades: 0
+			trades: 0,
+			monthly_costs: 0
 		};
 
 		$( '#_showTotalBox' ).css({ opacity: 0 });
@@ -138,7 +168,7 @@ jQuery(function() {
 
 
 		var account_size = parseInt( $( '#account_size' ).val() );
-		var new_size = account_size + _total.profit;
+		var new_size = account_size + _total.profit - _total.monthly_costs;
 
 		var $total = $(
 			'<h3>Summary:</h3>' +

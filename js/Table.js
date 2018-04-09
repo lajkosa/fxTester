@@ -1,7 +1,7 @@
 /**
  * Table.js
  *
- * This IIFE implements a global Table object which helps to creat a dynamic HTML table.
+ * This IIFE implements a global Table object which helps to create a dynamic HTML table.
  *
  */
 (function() {
